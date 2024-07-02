@@ -2,11 +2,7 @@ import 'package:get/get.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/usecases/fetch_users.dart';
 
-class UserController extends GetxController {
-  final FetchUsers fetchUsers;
-
-  UserController(this.fetchUsers);
-
+class UserListController extends GetxController {
   var users = <UserEntity>[].obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
@@ -19,7 +15,7 @@ class UserController extends GetxController {
 
   Future<void> _fetchUsers() async {
     isLoading.value = true;
-    final result = await fetchUsers();
+    final result = await FetchUsers()();
     result.fold(
       (failure) {
         errorMessage.value = failure.message;

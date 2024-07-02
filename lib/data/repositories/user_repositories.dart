@@ -4,16 +4,12 @@ import 'package:wits_task/core/network/network.dart';
 import '../../core/failures/failures.dart';
 import '../../domain/entities/user_entity.dart';
 import '../models/user_model.dart';
-import 'user_repositories_interface.dart';
 
-class UserRepository implements UserRepositoryInterface {
-  final Api apiClient;
+class UserRepository {
+  final Api api = Api();
 
-  UserRepository(this.apiClient);
-
-  @override
   Future<Either<Failure, List<UserEntity>>> fetchUsers() async {
-    final response = await apiClient.call(
+    final response = await api.call(
       HTTP.GET,
       'https://jsonplaceholder.typicode.com/users',
     );
